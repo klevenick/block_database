@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="index.css"> 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script> 
+     <style>
+        #map { height: 500px; width: 100%; }
+    </style>
+
+    <script type="text/javascript">
+
+        function findCenter(arr)
+        {
+            var minX, maxX, minY, maxY;
+            for (var i = 0; i < arr.length; i++)
+            {
+                minX = (arr[i][0] < minX || minX == null) ? arr[i][0] : minX;
+                maxX = (arr[i][0] > maxX || maxX == null) ? arr[i][0] : maxX;
+                minY = (arr[i][1] < minY || minY == null) ? arr[i][1] : minY;
+                maxY = (arr[i][1] > maxY || maxY == null) ? arr[i][1] : maxY;
+            }
+            return [(minX + maxX) / 2, (minY + maxY) / 2];
+        }
+        
+        var blockAssociations = [
+            {
+                name: "Caroll Street Block Association",
+                boundaries: "Carroll St between Bedford and Franklin",
+                boundaryCoords: [[40.668329,-73.958784],[40.667711, -73.956176],[40.667003, -73.956477],[40.667807, -73.959053]],
+                contactType: "email",
+                contactEmail: "1030carrolltenants@gmail.com",
+                color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);})
+            },
+            {
+                name: "Lefferts Alliance Community Togetherness",
+                boundaries: "Lefferts between Rogers and Washington",
+                boundaryCoords:[[40.662399, -73.953752],[40.661881, -73.953665],[40.661329, -73.960702],[40.662112, -73.960818]],
+                contactType: "email",
+                contactEmail: "franciscabarnard11@yahoo.com",
+                color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);})
+            },
+            {
+                name: "Union Street Block and Civic Association",
+                boundaries: "Union Street between Franklin and Bedford",
+                boundaryCoords:[[40.670108, -73.958186],[40.669485, -73.955540],[40.668969, -73.955733],[40.669466, -73.958430]],
+                contactType: "email",
+                contactEmail: "unionstreetbuf@yahoo.com",
+                color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);})
+            },
+            {
+                name: "Lincoln Civic Block Association",
+                boundaries: "Lincoln Place and St Johns Place between Nostrand and Brooklyn Avenue",
+                boundaryCoords:[[40.670196, -73.944973],[40.671765, -73.944804],[40.672053, -73.950292],[40.670420, -73.950461]],
+                contactType: "website",
+                contactEmail: "https://www.lcbabrooklynofficial.com/",
+                color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);})
+            },
+            {
+                name: "Lefferts Place Civic Assocation",
+                boundaries: "Lefferts Pl between Classon and St James",
+                boundaryCoords: [[40.681267, -73.958520],[40.682240, -73.963595],[40.681420, -73.963451],[40.680403, -73.958318]],
+                contactType: "website",
+                contactEmail: "https://www.facebook.com/lefferts.blockassociation/",
+                color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);})
+            },
+            {
+                name: "Park Place 900s Block Association",
+                boundaries: "Park Place between New York and Brooklyn",
+                boundaryCoords:[[40.67348801855761, -73.9446666027684],[40.67367392747683, -73.94736294212707],[40.67283186528752, -73.94743503676233],[40.67264595402037, -73.9446954406225]],
+                contactType: "email",
+                contactEmail: "triplett.erin@gmail.com",
+                color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);}) 
+            },
+            {
+                name: "The Rebirth of Bergen Street B.A.",
+                boundaries: "Bergen between Brooklyn & New York Aves",
+                boundaryCoords:[[40.67544550414343, -73.94440706205128],[40.6762328564271, -73.94436380527011],[40.676221921042384, -73.94708898248292],[40.675456439655484, -73.94717549604522]],
+                contactType: "website",
+                contactEmail: "https://www.facebook.com/p/The-Rebirth-of-Bergen-Street-Block-Association-100064522009555/",
+                color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);})
+            },
+            {
+                name: "St. Mark's Avenue Independent Block Association",
+                boundaries: "St. Mark's between Kingston and New York Ave",
+                boundaryCoords:[[40.67550018166538, -73.94720433372069],[40.67519398685056, -73.94168188465984],[40.67386914565525, -73.94180845828926],[40.67450504337568, -73.94736294191826]],
+                contactType: "email",
+                contactEmail: "amylynnperry928@gmail.com",
+                color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);}) 
+            },
+            {
+                name: "Sullivan/Stoddard Neighborhood Association",
+                boundaries: "Stoddard Place, Ludlam Place and Sullivan Place between Bedford and Rogers Avenues",
+                boundaryCoords:[[40.66553697598478, -73.95695311293801],[40.66563541015439, -73.95592936911733],[40.66559166165248, -73.95493446315076],[40.664760434664025, -73.95388188147598],[40.664213569153375, -73.95388188147598],[40.66394013471659, -73.95724149147904],[40.664640124636385, -73.95727032933316]],
+                contactType: "website",
+                contactEmail: "https://www.slsna.org/about-us",
+                color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);}) 
+            },
+            {
+                name: "Sterling World",
+                boundaries: "Sterling Place Between Troy and Schenectady Avenues",
+                boundaryCoords:[[40.67217548847713, -73.93642055906454],[40.67207706396081, -73.93360886828944],[40.67124591780709, -73.9336521250706],[40.67135527973503, -73.93644939691865]],
+                contactType: "website",
+                contactEmail: "https://www.instagram.com/sterlingworld_08/",
+                color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);})
+            },
+            {
+                name: "Dean Street Block Association",
+                boundaries: "Dean Street from Brooklyn to Kingston",
+                boundaryCoords:[[40.6769434355426, -73.9443077127931],[40.67672472983872, -73.94153927879917],[40.676002995925415, -73.94159695450738],[40.67624357476467, -73.94437980742836]],
+                contactType: "phone",
+                contactEmail: "718-953-1470",
+                color: "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);}) 
+            }
+        ]
+    </script>
+  </head>
+  <body>
+        <article id="body-header">
+          <h1>Block Associations near you</h1>
+        </article>
+    <section id="body-wrapper">
+        <section id="map-sidebar">
+        </section>
+        <section id="map-main">
+
+          <div id="map"></div>
+          
+        </section>
+    </section>
+    <script src="index.js"></script>
+
+    <script>
+       var map = L.map('map').setView([40.665380, -73.954256], 14);
+       function openBAPopup(e) {
+
+        console.log(this);
+       }
+
+       function addSidebarEntry(ba) {
+        var newEntry = document.createElement("section");
+        var newEntryDetails = document.createElement("section");
+        var newEntryName = document.createElement("h3");
+        var newEntryColorbar = document.createElement("section");
+        
+
+        newEntry.classList.add("sidebar-entry");
+        newEntryDetails.classList.add("sidebar-details");
+        newEntryColorbar.classList.add("sidebar-color")
+
+        newEntryName.textContent = ba.name;
+
+        newEntryColorbar.style.backgroundColor = ba.color;
+
+        newEntryDetails.appendChild(newEntryName);
+        newEntry.appendChild(newEntryColorbar);
+        newEntry.appendChild(newEntryDetails);
+
+        const sidebarDiv = document.getElementById("map-sidebar");
+
+        sidebarDiv.appendChild(newEntry);
+       }
+        
+        blockAssociations.forEach((ba) => { 
+            //console.log(ba);
+            //console.log(ba.boundaryCoords);
+            var BACenter = findCenter(ba.boundaryCoords);
+            var BALatLong = ba.boundaryCoords;
+            var BAPolygon = L.polygon(BALatLong, {color: ba.color, name: ba.name});
+            var BAName = ba.name;
+
+            var BAMarker = L.marker(BACenter).addTo(map);
+            //BAPolygon.bindPopup(BAName);
+            //console.log("Done with ba");
+            BAPolygon.on('click', openBAPopup);
+            BAMarker.on('click', openBAPopup);
+            addSidebarEntry(ba);
+        })
+
+       
+       L.marker([40.665380, -73.954256])
+                        .addTo(map)
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        
+            
+
+
+    </script>
+  </body>
+</html>
