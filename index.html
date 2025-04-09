@@ -138,8 +138,17 @@
     <script>
        var map = L.map('map').setView([40.665380, -73.954256], 14);
        function openBAPopup(e) {
+        var marketName = this.options.nameValue;
+        var polygon = this.options.polygon;
 
-        console.log(this);
+
+        if(map.hasLayer(polygon)) {
+           map.removeLayer(polygon); 
+        }
+        else {
+            polygon.addTo(map);
+        }
+
        }
 
        function addSidebarEntry(ba) {
@@ -167,14 +176,15 @@
        }
         
         blockAssociations.forEach((ba) => { 
-            //console.log(ba);
-            //console.log(ba.boundaryCoords);
             var BACenter = findCenter(ba.boundaryCoords);
             var BALatLong = ba.boundaryCoords;
             var BAPolygon = L.polygon(BALatLong, {color: ba.color, name: ba.name});
             var BAName = ba.name;
 
-            var BAMarker = L.marker(BACenter).addTo(map);
+            var BAMarker = L.marker(BACenter, {
+                nameValue: ba.name,
+                polygon: BAPolygon
+            }).addTo(map);
             //BAPolygon.bindPopup(BAName);
             //console.log("Done with ba");
             BAPolygon.on('click', openBAPopup);
