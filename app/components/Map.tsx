@@ -1,11 +1,33 @@
 'use client'
-
+import { useEffect } from "react"
 import { MapContainer, Polygon, Marker, TileLayer, Popup, useMap } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
 import "leaflet-defaulticon-compatibility"
 import * as L from "leaflet"
+import { GeoSearchControl, MapBoxProvider } from 'leaflet-geosearch';
+import "leaflet-geosearch/assets/css/leaflet.css";
 
+const SearchField = ({ apiKey }) => {
+  const provider = new MapBoxProvider({
+    params: {
+      access_token: apiKey,
+    },
+  });
+
+  // @ts-ignore
+  const searchControl = new GeoSearchControl({
+    provider: provider,
+  });
+
+  const map = useMap();
+  useEffect(() => {
+    map.addControl(searchControl);
+    return () => map.removeControl(searchControl);
+  }, []);
+
+  return null;
+};
 
 
 
@@ -56,7 +78,7 @@ export default function Map(bas: any) {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-           
+           <SearchField apikey={"123"}/>
             {baMarkers}
         </MapContainer>
     )

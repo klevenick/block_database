@@ -1,7 +1,5 @@
 'use client'
 import { useForm, SubmitHandler } from "react-hook-form"
-//import { addressSearch } from "./Map"
-import { geo_api_key } from "../actions/geoapify"
 
 type Inputs = {
   location: string
