@@ -10,7 +10,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Block Power: Block Association Database",
-  description: "Find and connect with a block association near you!",
+  description: "Find and connect with a block association near",
 };
 
 const geistSans = Geist({
