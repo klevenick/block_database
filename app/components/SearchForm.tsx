@@ -1,9 +1,12 @@
 'use client'
 import { useForm, SubmitHandler } from "react-hook-form"
+//import { addressSearch } from "./Map"
+import { geo_api_key } from "../actions/geoapify"
 
 type Inputs = {
   location: string
 }
+
 
 export default function SearchForm() {
     const {
@@ -12,7 +15,10 @@ export default function SearchForm() {
     watch,
     formState: { errors },
   } = useForm<Inputs>()
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data)
+  }
+    
 
   //console.log(watch("example")) // watch input value by passing the name of it
 

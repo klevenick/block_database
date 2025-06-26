@@ -6,6 +6,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
 )
 
+
 export async function getBAs() {
 
     const { data, error } = await supabase

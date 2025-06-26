@@ -4,8 +4,31 @@ import { MapContainer, Polygon, Marker, TileLayer, Popup, useMap } from "react-l
 import "leaflet/dist/leaflet.css"
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
 import "leaflet-defaulticon-compatibility"
-import L from "leaflet"
+import * as L from "leaflet"
 
+
+
+
+function blockPopUp(block: any) {
+    //console.log("block for popup:")
+    //console.log(block)
+    return (
+
+        <section className="blockPopup">
+            <h2>{block.name}</h2>
+            <h3>Boundaries</h3>
+            <span>{block.boundaries}</span>
+            <div className="blockPopup-contact">
+                <h3>Contact</h3> 
+                {block.email ? (<span>Email: {block.email}</span>) : null}
+                {block.phone ? (<span>Phone: {block.phone}</span>) : null}
+                {block.website ? (<span>Website: {block.website}</span>) : null}
+                
+                
+            </div>            
+        </section>
+    )
+}
 
 export default function Map(bas: any) {
 
@@ -17,8 +40,10 @@ export default function Map(bas: any) {
         
         return (
         <>
-            <Marker key={block.id} position={blockCenter} />
-            <Polygon positions={block.coords} />
+            <Marker key={"marker" + block.id} position={blockCenter}>
+                 <Popup key={"popup" + block.id} maxWidth={800}>{blockPopUp(block)}</Popup>
+            </Marker>
+            <Polygon key={"poly" + block.id} positions={block.coords} />
         </>  
         )
     }
@@ -31,7 +56,7 @@ export default function Map(bas: any) {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-
+           
             {baMarkers}
         </MapContainer>
     )
