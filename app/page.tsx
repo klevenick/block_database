@@ -21,9 +21,9 @@ export default function Page() {
 
   return (
     <main className="min-h-screen flex flex-col items-center">
-      <h1>Find a block database near you</h1>
-      <section className="searchInput">
-
+      <section className="pageHeader">
+        <h1>Find a block database near you</h1>
+        <span>Enter your address in the search bar below</span>
       </section>
       <section className="mapSection">
       <MapLoader blockData={blockData}/>

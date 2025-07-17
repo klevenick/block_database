@@ -4,7 +4,13 @@ import "leaflet-geosearch/assets/css/leaflet.css";
 import { useEffect } from 'react';
 
 export default function SearchField() {
-  const provider = new OpenStreetMapProvider()
+  const provider = new OpenStreetMapProvider({
+    params: {
+      email: 'klevenick@gmail.com',
+      'accept-language': 'en-US',
+      countrycodes: 'us'
+    }
+  })
 
   // @ts-expect-error GeoSearchControl isn't mine
   const searchControl = new GeoSearchControl({
