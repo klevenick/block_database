@@ -33,7 +33,7 @@ export default function Map({ blockData } : { blockData : Array<Block> }) {
     
     
     return (
-        <MapContainer center={[40.67443, -73.94438]} zoom={17} scrollWheelZoom={false}>
+        <MapContainer center={[40.67443, -73.94438]} zoom={17} scrollWheelZoom={true}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

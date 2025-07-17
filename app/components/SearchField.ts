@@ -9,6 +9,7 @@ export default function SearchField() {
   // @ts-expect-error GeoSearchControl isn't mine
   const searchControl = new GeoSearchControl({
     provider: provider,
+    style: 'bar'
   });
 
   const map = useMap();
