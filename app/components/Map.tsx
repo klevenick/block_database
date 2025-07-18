@@ -7,8 +7,10 @@ import * as L from "leaflet"
 import SearchField from "./SearchField"
 import React from "react"
 import { Block } from '@/lib/definitions'
+import Link from "next/link"
 
 function blockPopUp(block: Block) {
+    const emailLink = "mailto:" + block.email
 
     return (
 
@@ -18,9 +20,9 @@ function blockPopUp(block: Block) {
             <span>{block.boundaries}</span>
             <div className="blockPopup-contact">
                 <h3>Contact</h3> 
-                {block.email ? (<span>Email: {block.email}</span>) : null}
+                {block.email ? (<span>Email: <Link target="_blank" href={emailLink}>{block.email}</Link></span>) : null}
                 {block.phone ? (<span>Phone: {block.phone}</span>) : null}
-                {block.website ? (<span>Website: {block.website}</span>) : null}
+                {block.website ? (<span>Website: <Link target="_new" href={block.website}>{block.website}</Link></span>) : null}
                 
                 
             </div>            
