@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/client'
 import { QueryData } from '@supabase/supabase-js'
+import { SubmissionInputs } from './definitions'
 
 
 export interface blockObject {
@@ -25,3 +26,19 @@ export async function getBlockAssociations() {
   
   return block_associations
 } 
+
+export async function blockAssociationSubmission(formData : SubmissionInputs) {
+  const supabase = await createClient()
+  const response = await supabase.from('submissions').insert({
+    name: formData.name,
+    email: formData.email,
+    block_association_name: formData.block_association_name,
+    block_association_email: formData.block_association_email,
+    block_association_website: formData.block_association_website,
+    block_association_phone: formData.block_association_phone,
+    block_association_boundaries: formData.block_association_boundaries,
+    other_info: formData.other_info
+  }
+  )
+  console.log(response)
+}

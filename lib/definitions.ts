@@ -7,3 +7,13 @@ export interface Block {
     id: string,
     coords: Array<L.LatLngExpression>
 }
+export interface SubmissionInputs {
+  name: string,
+  email: string,
+  block_association_name: string,
+  block_association_email: string,
+  block_association_website: string,
+  block_association_phone: string,
+  block_association_boundaries: string,
+  other_info: string
+}

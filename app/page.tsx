@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { getBlockAssociations } from "@/lib/db"
 import { useEffect, useState } from 'react'
 import { Block } from '@/lib/definitions'
+import Link from 'next/link'
 
 
 const MapLoader = dynamic(() => import('./components/Map'), {
@@ -27,6 +28,9 @@ export default function Page() {
       </section>
       <section className="mapSection">
       <MapLoader blockData={blockData}/>
+      </section>
+      <section className="contactSection">
+        <Link href="/contact" >Add Your Block Association</Link>
       </section>
     </main>
   );
