@@ -17,6 +17,7 @@
     "clsx": "^2.1.1",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
+    "leaflet-draw": "^1.0.4",
     "leaflet-geosearch": "^4.2.0",
     "lucide-react": "^0.511.0",
     "next": "latest",
@@ -25,6 +26,7 @@
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.60.0",
     "react-leaflet": "^5.0.0-rc.2",
+    "react-leaflet-draw": "^0.20.6",
     "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {

@@ -17,3 +17,8 @@ export interface SubmissionInputs {
   block_association_boundaries: string,
   other_info: string
 }
+
+export interface ApprovedSubmission extends SubmissionInputs {
+  coords: Array<L.LatLngExpression>,
+  is_active: boolean
+}

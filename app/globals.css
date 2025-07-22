@@ -1,6 +1,12 @@
+@import '../node_modules/leaflet/dist/leaflet.css';
+@import '../node_modules/leaflet-draw/dist/leaflet.draw.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.sr-only {
+    display: none;
+  }
 
 @layer base {
   :root {
@@ -132,7 +138,7 @@ a {
 
 }
 
-.contactSection {
+.contactSection, .admin_button {
   margin: 20px;
   padding: 10px;
   background-color: lightseagreen;
@@ -146,11 +152,21 @@ a {
   }
 }
 
-.contact_main {
+.general_main {
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+
+}
+
+.contact_main, .submission_list {
   margin: 0 auto;
   padding: 10px;
   max-width: 100%;
   height: 100%;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,6 +186,7 @@ a {
     flex-direction: column;
     width: 100%;
     max-width: 500px;
+    min-width: 200px;
     justify-content: center;
     border: 0px solid lightgray;
     box-shadow: 3px 3px 10px black;
@@ -213,4 +230,39 @@ a {
   align-items: center;
   margin: 20px;
 
+}
+
+.submission_container {
+  border: 1px solid grey;
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: aliceblue;
+
+  
+}
+.submission_container:hover {
+    background-color: rgb(116, 184, 244)
+}
+.submission_map_main {
+  width: 100%;
+}
+.submission_map_container {
+  display: flex;
+  flex-direction: row;
+
+  .submission_list {
+    width: 20%;
+    max-width: 300px;
+    min-width: 200px;
+    flex-grow: 1;
+
+  }
+  .polycoord {
+    font-size: .75em
+  }
+  .submission_map {
+    
+    height: 500px;
+    flex-grow: 2;
+  }
 }
