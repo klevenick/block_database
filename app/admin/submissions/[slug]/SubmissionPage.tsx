@@ -1,28 +1,58 @@
 'use client'
-import { getSubmission, submissionApproval } from "@/lib/db";
-import { ApprovedSubmission, Block, SubmissionInputs } from "@/lib/definitions";
-import SubMap from './SubMap'
-import { useForm, SubmitHandler } from "react-hook-form"
+import { SubmissionInputs } from "@/lib/definitions";
 import SubmissionForm from "./SubmissionForm";
-import { useState } from "react";
-import { useRef } from "react";
-import { LatLngLiteral } from "leaflet";
+import dynamic from 'next/dynamic'
+import { LatLng } from "leaflet";
+import { createContext, ReactNode, useContext, useState } from "react";
+
+const MapLoader = dynamic(() => import('./Map'), {
+        loading: () => <p>Loading...</p>,
+        ssr: false
+      })
+
+// Define the type for polygon coordinates
+export type PolygonCoords = [number, number][]; // Array of [latitude, longitude] pairs
+
+interface PolygonContextType {
+  polygonCoords: PolygonCoords;
+  setPolygonCoords: (coords: PolygonCoords) => void;
+}
+
+// Create a Context with a default null value, which will be provided by the Provider
+const PolygonContext = createContext<PolygonContextType | null>(null);
+
+interface PolygonProviderProps {
+  children: ReactNode;
+}
+
+// Custom hook to use the PolygonContext
+export const usePolygon = () => {
+  const context = useContext(PolygonContext);
+  if (context === null) {
+    throw new Error('usePolygon must be used within a PolygonProvider');
+  }
+  return context;
+};
+
 
 export default function SubmissionPage({submission}: {submission: SubmissionInputs}) {
-    
-   // const polyCoords = useRef<Array<LatLngLiteral>>([])
-    const [polyCoords, setPolyCoords] = useState(Array<L.LatLng>)
+    const [polygonCoords, setPolygonCoords] = useState<PolygonCoords>([]);
 
+    
         return (
         <main className="submission_map_main">
                 <h1>Submission</h1>
             <section className="submission_map_container">
                 <section className="submission_list">
-                    <SubmissionForm submission={submission} polyCoords={polyCoords} />
+                        <PolygonContext.Provider value={{ polygonCoords, setPolygonCoords }}>
+                        <SubmissionForm submission={submission} />
+                        </PolygonContext.Provider>
                     
                 </section> 
                 <section className="submission_map" >
-                    <SubMap setPolyCoords={setPolyCoords}/>
+                        <PolygonContext.Provider value={{ polygonCoords, setPolygonCoords }}>
+                        <MapLoader />
+                        </PolygonContext.Provider>
                 </section>
             </section>
         </main>

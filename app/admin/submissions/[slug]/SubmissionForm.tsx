@@ -1,20 +1,23 @@
 'use client'
 import { getSubmission, submissionApproval } from "@/lib/db"
 import { ApprovedSubmission, SubmissionInputs } from "@/lib/definitions"
-import { LatLng, LatLngExpression, LatLngLiteral } from "leaflet"
+import { LatLng, LatLngExpression, LatLngLiteral, polygon } from "leaflet"
 import router from "next/router"
-import { Dispatch, RefObject, SetStateAction, useEffect, useState } from "react"
+import { Dispatch, RefObject, SetStateAction, useContext, useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
+import { usePolygon, PolygonCoords } from "./SubmissionPage"
 
 
-export default function SubmissionForm({submission, polyCoords} : {submission: SubmissionInputs, polyCoords: Array<L.LatLng>}) {
-    
-     
-    const polyDiv = polyCoords ? polyCoords.map((polyPoint, index) => {
+export let polylayer = []
+
+export default function SubmissionForm({submission} : {submission: SubmissionInputs}) {
+    const { polygonCoords } = usePolygon();
+    console.log(polygonCoords)  
+    const polyDiv = polygonCoords ? polygonCoords.map((polyPoint, index) => {
         
         return (
             <div className="polycoord" key={index}>
-                <span>Point {index}: Lat:{polyPoint.lat} | Lng:{polyPoint.lng}</span>
+                <span>Point {index}: Lat:{polyPoint[0]} | Lng:{polyPoint[1]}</span>
             </div>
         )
     }) : null
