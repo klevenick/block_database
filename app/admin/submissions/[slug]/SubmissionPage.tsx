@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { LatLng } from "leaflet";
 import { createContext, ReactNode, useContext, useState } from "react";
 
-const MapLoader = dynamic(() => import('./Map'), {
+const MapLoader = dynamic(() => import('./SubmissionMap'), {
         loading: () => <p>Loading...</p>,
         ssr: false
       })

@@ -19,6 +19,8 @@ export default async function Page({
     }
     
     const submission: SubmissionInputs = await getSubmission(submissionId)
+    console.log("submission retrieved")
+    console.log(submission)
     
     return <SubmissionPage submission={submission} />
 }

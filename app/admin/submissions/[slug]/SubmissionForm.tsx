@@ -2,7 +2,7 @@
 import { getSubmission, submissionApproval } from "@/lib/db"
 import { ApprovedSubmission, SubmissionInputs } from "@/lib/definitions"
 import { LatLng, LatLngExpression, LatLngLiteral, polygon } from "leaflet"
-import router from "next/router"
+import { useRouter } from "next/navigation"
 import { Dispatch, RefObject, SetStateAction, useContext, useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { usePolygon, PolygonCoords } from "./SubmissionPage"
@@ -11,8 +11,8 @@ import { usePolygon, PolygonCoords } from "./SubmissionPage"
 export let polylayer = []
 
 export default function SubmissionForm({submission} : {submission: SubmissionInputs}) {
+    const router = useRouter()
     const { polygonCoords } = usePolygon();
-    console.log(polygonCoords)  
     const polyDiv = polygonCoords ? polygonCoords.map((polyPoint, index) => {
         
         return (
@@ -27,9 +27,9 @@ export default function SubmissionForm({submission} : {submission: SubmissionInp
         formState: { errors, isSubmitting },
     } = useForm<ApprovedSubmission>()
     const onSubmit: SubmitHandler<ApprovedSubmission> = async (data) => {
-        const submissionResponse = await submissionApproval(data)
-        console.log(submissionResponse)
-        router.push("./contact/confirm")
+        data.coords = polygonCoords
+        const submissionResponse = await submissionApproval(data,submission.id)
+        router.push("../submissions")
     }   
 
     

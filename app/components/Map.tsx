@@ -33,7 +33,6 @@ function blockPopUp(block: Block) {
 
 export default function Map({ blockData } : { blockData : Array<Block> }) {
     
-    
     return (
         <MapContainer center={[40.67443, -73.94438]} zoom={17} scrollWheelZoom={true}>
             <TileLayer
@@ -41,7 +40,7 @@ export default function Map({ blockData } : { blockData : Array<Block> }) {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            { blockData.map((block: Block, index: number) => {
+            { blockData ? blockData.map((block: Block, index: number) => {
                 const blockPoly = L.polygon(block.coords)
                 const blockCenter = blockPoly.getBounds().getCenter()
                 return (
@@ -52,7 +51,7 @@ export default function Map({ blockData } : { blockData : Array<Block> }) {
                 <Polygon key={"poly" + block.id} positions={block.coords} />
                 </React.Fragment>
                 )
-            }) }
+            }) : null}
            <SearchField />
         </MapContainer>
     )

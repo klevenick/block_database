@@ -19,9 +19,8 @@ const DrawComponent = () => {
         const { layerType, layer } = e;
         if (layerType === 'polygon') {
             const coordinatesArray = layer.getLatLngs()[0]
-
             const coordinates = coordinatesArray.map((latlng: LatLng) => [latlng.lat, latlng.lng]);
-        setPolygonCoords(coordinates); // Update context state
+            setPolygonCoords(coordinates); // Update context state
         }
     };
         return (
