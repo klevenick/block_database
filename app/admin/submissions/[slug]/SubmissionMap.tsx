@@ -1,11 +1,11 @@
 
-import { MapContainer, Polygon, Marker, TileLayer, Popup, FeatureGroup, Circle, useMap } from "react-leaflet"
+import { MapContainer, TileLayer, FeatureGroup, Circle } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
 import "leaflet-defaulticon-compatibility"
-import React, { useContext, useState } from "react"
+import React from "react"
 import { EditControl } from "react-leaflet-draw"
-import { usePolygon, PolygonCoords } from "./SubmissionPage"
+import { usePolygon } from "./SubmissionPage"
 import { LatLng } from "leaflet"
 
 function handleDraw(e: any) {

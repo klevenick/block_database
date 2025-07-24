@@ -1,11 +1,9 @@
 'use client'
-import { getSubmission, submissionApproval } from "@/lib/db"
+import { submissionApproval } from "@/lib/db"
 import { ApprovedSubmission, SubmissionInputs } from "@/lib/definitions"
-import { LatLng, LatLngExpression, LatLngLiteral, polygon } from "leaflet"
 import { useRouter } from "next/navigation"
-import { Dispatch, RefObject, SetStateAction, useContext, useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { usePolygon, PolygonCoords } from "./SubmissionPage"
+import { usePolygon } from "./SubmissionPage"
 
 
 export let polylayer = []

@@ -46,7 +46,6 @@ export async function blockAssociationSubmission(formData : SubmissionInputs) {
 }
 
 export async function submissionApproval(formData : ApprovedSubmission, submissionId: number) {
-  console.log("submitting")
   const supabase = createClient()
   const {data,error} = await supabase.from('block_associations').insert({
       name: formData.block_association_name,
@@ -57,13 +56,11 @@ export async function submissionApproval(formData : ApprovedSubmission, submissi
       coords: formData.coords
     }
   ).select()
-console.log("response")
-console.log(data)
+
   if(data) {
     
     const hideResponse = await hideSubmission(submissionId)
-    console.log("closing response")
-    console.log(hideResponse)
+
     if(hideResponse.data){
       return data
     }
