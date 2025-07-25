@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css"
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
 import "leaflet-defaulticon-compatibility"
 import React from "react"
-import { EditControl } from "react-leaflet-draw"
+import { EditControl, EditControlProps} from "react-leaflet-draw"
 import { usePolygon } from "./SubmissionPage"
 import { LatLng } from "leaflet"
 
@@ -16,6 +16,7 @@ const DrawComponent = () => {
     const { setPolygonCoords } = usePolygon(); // Get the setter from context
 
     const _onCreated = (e: any) => {
+
         const { layerType, layer } = e;
         if (layerType === 'polygon') {
             const coordinatesArray = layer.getLatLngs()[0]

@@ -13,6 +13,7 @@ const MapLoader = dynamic(() => import('./components/Map'), {
 
 export default function Page() {
   const [blockData, setBlockData] = useState(Array<Block>);
+  
 
   useEffect(() => {
   getBlockAssociations().then((data) => {
