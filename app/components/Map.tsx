@@ -16,10 +16,10 @@ function blockPopUp(block: Block) {
 
         <section className="blockPopup">
             <h2>{block.name}</h2>
-            <h3>Boundaries</h3>
+            <h3>Home Base</h3>
             <span>{block.boundaries}</span>
             <div className="blockPopup-contact">
-                <h3>Contact</h3> 
+                <h3>Reach Out</h3> 
                 {block.email ? (<span>Email: <Link target="_blank" href={emailLink}>{block.email}</Link></span>) : null}
                 {block.phone ? (<span>Phone: {block.phone}</span>) : null}
                 {block.website ? (<span>Website: <Link target="_new" href={block.website}>{block.website}</Link></span>) : null}

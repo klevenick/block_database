@@ -51,7 +51,7 @@ export default function SubmissionForm({submission} : {submission: SubmissionInp
             <label>Block Association Website: </label>
             <input defaultValue={submission.block_association_website} {...register("block_association_website")} />
             <label>Other Info: </label>
-            <textarea defaultValue="" {...register("other_info")} placeholder="Any other info you want to include (focus of the block association, any other contacts, etc)" />
+            <textarea defaultValue={submission.other_info} {...register("other_info")}  />
             {polyDiv}
             <button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? 'Submitting...' : 'Submit'}
