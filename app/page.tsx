@@ -13,7 +13,7 @@ const MapLoader = dynamic(() => import('./components/Map'), {
 
 export default function Page() {
   const [blockData, setBlockData] = useState(Array<Block>);
-  
+
 
   useEffect(() => {
   getBlockAssociations().then((data) => {
@@ -30,8 +30,17 @@ export default function Page() {
       <section className="mapSection">
       <MapLoader blockData={blockData}/>
       </section>
-      <section className="contactSection">
-        <Link href="/contact" >Add Your Block Association</Link>
+      <section className="button_footer">
+        <div className="button">
+          <Link href="./contact">
+            Add Your Block Association
+          </Link>
+        </div>
+        <div className="button">
+          <Link href="./faq">
+            FAQ
+          </Link>
+        </div>
       </section>
     </main>
   );

@@ -95,6 +95,11 @@ main {
 h1 {
   font-size: 2em
 }
+@media (max-width: 780px) {
+  h1 {
+    font-size: 1.5em;
+  }
+}
 
 a {
   color: blue;
@@ -142,18 +147,29 @@ a {
   }
 
 }
+.button_footer {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
 
-.contactSection, .admin_button {
-  margin: 20px;
-  padding: 10px;
-  background-color: lightseagreen;
-  color: white;
-  font-weight: 600;
-  border-radius: 5px;
-  cursor: pointer;
-
-  a {
+  .button, .admin_button {
+    margin: 10px;
+    padding: 10px;
+    min-width: 75px;
+    text-align: center;
+    background-color: lightseagreen;
     color: white;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    a {
+      position: aboslute;
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      color: white;
+    }
   }
 }
 
@@ -269,5 +285,45 @@ a {
     
     height: 500px;
     flex-grow: 2;
+  }
+}
+
+
+.faq_main {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .faq_header {
+    margin: 20px 0 10px;
+    font-weight: 800;
+  }
+  .faq_body {
+    margin: 5px 0;
+    align-self: start;
+    width: 100%;
+
+    .faq_detail{
+      margin: 0 0 10px;
+      padding: 20px;
+      width: 100%;
+      box-shadow: 3px 3px 10px black;
+
+      .faq_question {
+        font-size: 1.25em;
+        font-weight: 600;
+        border-bottom: 1px solid black;
+        margin: 0 0 10px;
+      }
+
+
+    }
+
+    
+
   }
 }
