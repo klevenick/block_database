@@ -145,6 +145,9 @@ a {
     text-decoration: underline
 
   }
+  .blockPopup_contact {
+    margin: 0 0 10px;
+  }
 
 }
 .button_footer {

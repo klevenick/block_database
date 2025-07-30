@@ -11,6 +11,7 @@ import Link from "next/link"
 
 function blockPopUp(block: Block) {
     const emailLink = "mailto:" + block.email
+    const updateDate = new Date(block.updated_at).toDateString().substring(4)
 
     return (
 
@@ -18,14 +19,15 @@ function blockPopUp(block: Block) {
             <h2>{block.name}</h2>
             <h3>Home Base</h3>
             <span>{block.boundaries}</span>
-            <div className="blockPopup-contact">
+            <div className="blockPopup_contact">
                 <h3>Reach Out</h3> 
                 {block.email ? (<span>Email: <Link target="_blank" href={emailLink}>{block.email}</Link></span>) : null}
                 {block.phone ? (<span>Phone: {block.phone}</span>) : null}
                 {block.website ? (<span>Website: <Link target="_new" href={block.website}>{block.website}</Link></span>) : null}
                 
                 
-            </div>            
+            </div> 
+            <span>Last updated: {updateDate}</span>           
         </section>
     )
 }

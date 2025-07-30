@@ -1,21 +1,7 @@
 import { createClient, createAuthClient } from '@/lib/supabase/client'
 import { QueryData } from '@supabase/supabase-js'
-import { ApprovedSubmission, Block, SubmissionInputs } from './definitions'
-import { SetStateAction } from 'react'
-import { LatLng } from 'leaflet'
+import { ApprovedSubmission, SubmissionInputs } from './definitions'
 
-
-export interface blockObject {
-  id: number,
-  created_at: string,
-  name: string,
-  boundaries: string,
-  coords: Array<string>,
-  email: string,
-  phone: string,
-  website: string,
-  is_active: boolean
-}
 
 export async function getBlockAssociations() {
   const supabase = createClient()

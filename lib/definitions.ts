@@ -5,7 +5,8 @@ export interface Block {
     phone: string,
     website: string,
     id: string,
-    coords: Array<L.LatLngExpression>
+    coords: Array<L.LatLngExpression>,
+    updated_at: number
 }
 export interface SubmissionInputs {
   id: number,
